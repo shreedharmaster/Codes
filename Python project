@@ -1,0 +1,140 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/shreedharmaster/Codes/blob/main/Python%20project\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "background_save": true,
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sMufnGoecu_0",
+        "outputId": "10c957ce-f784-4b2f-fff8-d152dc4cf3f6"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Inventory Management System\n",
+            "1. Add Product\n",
+            "2. Display Inventory\n",
+            "3. Update Product Quantity\n",
+            "4. Exit\n",
+            "Enter your choice: 1\n",
+            "Enter product name: yahoo\n",
+            "Enter product quantity: 4\n",
+            "Enter product price: 2000\n",
+            "Product added successfully.\n",
+            "\n",
+            "Inventory Management System\n",
+            "1. Add Product\n",
+            "2. Display Inventory\n",
+            "3. Update Product Quantity\n",
+            "4. Exit\n"
+          ]
+        }
+      ],
+      "source": [
+        "from collections import defaultdict\n",
+        "\n",
+        "class Product:\n",
+        "    def __init__(self, name, quantity, price):\n",
+        "        self.name = name\n",
+        "        self.quantity = quantity\n",
+        "        self.price = price\n",
+        "\n",
+        "    def display_product(self):\n",
+        "        return f\"Name: {self.name}, Quantity: {self.quantity}, Price: {self.price}\"\n",
+        "\n",
+        "class Inventory:\n",
+        "    def __init__(self):\n",
+        "        self.products = defaultdict(Product)\n",
+        "\n",
+        "    def add_product(self, name, quantity, price):\n",
+        "        product_id = len(self.products) + 1\n",
+        "        product = Product(name, quantity, price)\n",
+        "        self.products[product_id] = product\n",
+        "        print(\"Product added successfully.\")\n",
+        "\n",
+        "    def display_inventory(self):\n",
+        "        if not self.products:\n",
+        "            print(\"Inventory is empty.\")\n",
+        "        else:\n",
+        "            for product_id, product in self.products.items():\n",
+        "                print(f\"ID: {product_id}, {product.display_product()}\")\n",
+        "\n",
+        "    def update_product_quantity(self, product_id, new_quantity):\n",
+        "        if product_id in self.products:\n",
+        "            self.products[product_id].quantity = new_quantity\n",
+        "            print(\"Quantity updated successfully.\")\n",
+        "        else:\n",
+        "            print(\"Product not found.\")\n",
+        "\n",
+        "def main():\n",
+        "    inventory = Inventory()\n",
+        "\n",
+        "    while True:\n",
+        "        print(\"\\nInventory Management System\")\n",
+        "        print(\"1. Add Product\")\n",
+        "        print(\"2. Display Inventory\")\n",
+        "        print(\"3. Update Product Quantity\")\n",
+        "        print(\"4. Exit\")\n",
+        "\n",
+        "        choice = input(\"Enter your choice: \")\n",
+        "\n",
+        "        if choice == '1':\n",
+        "            name = input(\"Enter product name: \")\n",
+        "            quantity = int(input(\"Enter product quantity: \"))\n",
+        "            price = float(input(\"Enter product price: \"))\n",
+        "            inventory.add_product(name, quantity, price)\n",
+        "\n",
+        "        elif choice == '2':\n",
+        "            print(\"\\nCurrent Inventory:\")\n",
+        "            inventory.display_inventory()\n",
+        "\n",
+        "        elif choice == '3':\n",
+        "            product_id = int(input(\"Enter product ID: \"))\n",
+        "            new_quantity = int(input(\"Enter new quantity: \"))\n",
+        "            inventory.update_product_quantity(product_id, new_quantity)\n",
+        "\n",
+        "        elif choice == '4':\n",
+        "            print(\"Exiting program. Goodbye!\")\n",
+        "            break\n",
+        "\n",
+        "        else:\n",
+        "            print(\"Invalid choice. Please try again.\")\n",
+        "\n",
+        "if __name__ == \"__main__\":\n",
+        "    main()\n"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPDaZdp6IgNtrZZeVeElc6j",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
